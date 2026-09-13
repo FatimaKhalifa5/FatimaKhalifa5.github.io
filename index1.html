@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of Fatima Jaffer A. Aziz Khalifa — Data Science, AI, and Analytics projects." />
+  <title>Fatima Khalifa | Data Science Portfolio</title>
+  <style>
+    :root{
+      --bg:#09090d;
+      --bg-soft:#111119;
+      --card:#15151f;
+      --card-2:#1b1b28;
+      --text:#f8f7ff;
+      --muted:#b9b6c9;
+      --purple:#7c3aed;
+      --purple-2:#a78bfa;
+      --purple-3:#c4b5fd;
+      --line:rgba(255,255,255,.09);
+      --shadow:0 24px 70px rgba(0,0,0,.42);
+      --radius:22px;
+      --max:1140px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(124,58,237,.16), transparent 30%),
+        radial-gradient(circle at 85% 10%, rgba(167,139,250,.08), transparent 25%),
+        var(--bg);
+      line-height:1.65;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size:44px 44px;
+      mask-image:linear-gradient(to bottom, black, transparent 86%);
+      z-index:-3;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button,input,textarea{font:inherit}
+
+    .container{width:min(92%,var(--max));margin:auto}
+    .section{padding:110px 0;position:relative}
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:36px;
+      font-size:clamp(1.9rem,4vw,2.8rem);
+      letter-spacing:-.04em;
+    }
+    .section-title::before{
+      content:"";
+      width:54px;
+      height:3px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--purple),var(--purple-2));
+      box-shadow:0 0 22px rgba(124,58,237,.75);
+    }
+    .eyebrow{
+      color:var(--purple-3);
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-size:.78rem;
+      font-weight:800;
+    }
+
+    /* Navigation */
+    .nav-wrap{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:1000;
+      border-bottom:1px solid transparent;
+      transition:.3s ease;
+    }
+    .nav-wrap.scrolled{
+      background:rgba(9,9,13,.78);
+      backdrop-filter:blur(16px);
+      border-color:var(--line);
+    }
+    nav{
+      min-height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+    .brand{
+      font-weight:900;
+      letter-spacing:-.03em;
+      font-size:1.08rem;
+    }
+    .brand span{color:var(--purple-2)}
+    .nav-links{
+      display:flex;
+      gap:26px;
+      align-items:center;
+    }
+    .nav-links a{
+      color:var(--muted);
+      font-size:.94rem;
+      font-weight:700;
+      position:relative;
+      transition:.25s ease;
+    }
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-8px;
+      width:0;
+      height:2px;
+      background:var(--purple-2);
+      transition:.25s ease;
+    }
+    .nav-links a:hover,.nav-links a.active{color:var(--text)}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .menu-btn{
+      display:none;
+      background:none;
+      border:0;
+      color:white;
+      cursor:pointer;
+      width:42px;
+      height:42px;
+      border-radius:12px;
+    }
+
+    /* Hero */
+    .hero{
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding:130px 0 70px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before,.hero::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      filter:blur(4px);
+      z-index:-1;
+    }
+    .hero::before{
+      width:480px;height:480px;
+      background:radial-gradient(circle,rgba(124,58,237,.22),transparent 68%);
+      top:2%;right:-140px;
+    }
+    .hero::after{
+      width:380px;height:380px;
+      background:radial-gradient(circle,rgba(167,139,250,.1),transparent 70%);
+      bottom:0;left:-140px;
+    }
+    .formula{
+      position:absolute;
+      color:rgba(255,255,255,.08);
+      font-family:Georgia,serif;
+      user-select:none;
+      animation:float 7s ease-in-out infinite;
+    }
+    .f1{top:16%;left:8%;font-size:2rem}
+    .f2{top:24%;right:10%;font-size:1.4rem;animation-delay:1.4s}
+    .f3{bottom:17%;left:13%;font-size:1.55rem;animation-delay:2.1s}
+    .f4{bottom:22%;right:12%;font-size:1.2rem;animation-delay:.8s}
+    @keyframes float{50%{transform:translateY(-14px)}}
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:70px;
+      align-items:center;
+    }
+    .hero-copy h1{
+      font-size:clamp(3rem,8vw,6.7rem);
+      line-height:.96;
+      margin:14px 0 24px;
+      letter-spacing:-.065em;
+      max-width:900px;
+    }
+    .hero-copy h1 .gradient{
+      background:linear-gradient(90deg,#fff 5%,var(--purple-3) 48%,var(--purple) 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .role{
+      display:inline-flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      color:var(--purple-3);
+      font-weight:800;
+      margin-bottom:18px;
+    }
+    .role::before{
+      content:"";
+      width:28px;height:2px;background:var(--purple-2);
+    }
+    .lead{
+      max-width:700px;
+      color:var(--muted);
+      font-size:clamp(1rem,2vw,1.2rem);
+      margin:0 0 34px;
+    }
+    .hero-actions{display:flex;flex-wrap:wrap;gap:14px}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:14px 21px;
+      border-radius:14px;
+      font-weight:800;
+      border:1px solid var(--line);
+      transition:.25s ease;
+      cursor:pointer;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,var(--purple),#5b21b6);
+      box-shadow:0 14px 34px rgba(124,58,237,.25);
+    }
+    .btn-secondary{background:rgba(255,255,255,.04)}
+    .btn:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(124,58,237,.24)}
+
+    .math-card{
+      background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
+      border:1px solid var(--line);
+      border-radius:30px;
+      padding:28px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(8px);
+      position:relative;
+      overflow:hidden;
+    }
+    .math-card::before{
+      content:"";
+      position:absolute;inset:0;
+      background:linear-gradient(120deg,transparent,rgba(167,139,250,.07),transparent);
+      transform:translateX(-100%);
+      animation:shine 6s linear infinite;
+    }
+    @keyframes shine{to{transform:translateX(100%)}}
+    .chart{
+      height:240px;
+      position:relative;
+      margin:12px 0 22px;
+      border-left:1px solid rgba(255,255,255,.16);
+      border-bottom:1px solid rgba(255,255,255,.16);
+    }
+    .chart::before{
+      content:"";
+      position:absolute;inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size:42px 42px;
+    }
+    .chart svg{position:absolute;inset:0;width:100%;height:100%}
+    .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .stat{
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,255,255,.035);
+    }
+    .stat strong{display:block;font-size:1.1rem}
+    .stat span{color:var(--muted);font-size:.78rem}
+
+    /* About */
+    .about-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:60px;
+      align-items:start;
+    }
+    .about-copy p{color:var(--muted);font-size:1.05rem;margin-top:0}
+    .timeline{
+      display:grid;
+      gap:18px;
+      position:relative;
+    }
+    .timeline::before{
+      content:"";
+      position:absolute;
+      left:13px;top:6px;bottom:6px;
+      width:2px;background:linear-gradient(var(--purple),transparent);
+    }
+    .timeline-item{
+      position:relative;
+      padding:20px 20px 20px 46px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+    }
+    .timeline-item::before{
+      content:"";
+      position:absolute;
+      left:7px;top:27px;
+      width:14px;height:14px;
+      border:3px solid var(--purple-2);
+      border-radius:50%;
+      background:var(--bg);
+      box-shadow:0 0 18px rgba(167,139,250,.6);
+    }
+    .timeline-item h3{margin:0 0 5px;font-size:1rem}
+    .timeline-item p{margin:0;color:var(--muted);font-size:.92rem}
+
+    /* Skills */
+    .skills-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .skill-card{
+      padding:25px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.025));
+      transition:.28s ease;
+    }
+    .skill-card:hover{transform:translateY(-6px);border-color:rgba(167,139,250,.45)}
+    .skill-card h3{margin-top:0}
+    .tags{display:flex;flex-wrap:wrap;gap:10px}
+    .tag{
+      padding:8px 11px;
+      border-radius:999px;
+      background:rgba(124,58,237,.12);
+      color:#ddd4ff;
+      border:1px solid rgba(167,139,250,.2);
+      font-size:.84rem;
+      font-weight:750;
+      transition:.2s ease;
+    }
+    .tag:hover{background:rgba(124,58,237,.23);transform:translateY(-2px)}
+
+    /* Project */
+    .project-card{
+      display:grid;
+      grid-template-columns:1fr .88fr;
+      gap:34px;
+      padding:32px;
+      border-radius:28px;
+      border:1px solid var(--line);
+      background:linear-gradient(140deg,rgba(124,58,237,.12),rgba(255,255,255,.035));
+      box-shadow:var(--shadow);
+      transition:.3s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .project-card:hover{transform:translateY(-7px);border-color:rgba(167,139,250,.5)}
+    .project-card::after{
+      content:"";
+      position:absolute;
+      width:220px;height:220px;
+      right:-90px;top:-100px;
+      border-radius:50%;
+      background:rgba(124,58,237,.17);
+      filter:blur(25px);
+    }
+    .project-copy h3{font-size:clamp(1.8rem,4vw,3rem);margin:8px 0 14px;letter-spacing:-.04em}
+    .project-copy p{color:var(--muted)}
+    .highlights{padding:0;list-style:none;margin:24px 0}
+    .highlights li{margin:10px 0;color:#d7d3e5;display:flex;gap:10px}
+    .highlights li::before{content:"✓";color:var(--purple-2);font-weight:900}
+    .project-visual{
+      min-height:330px;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:
+        linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px),
+        #101018;
+      background-size:34px 34px;
+      padding:22px;
+      display:grid;
+      align-content:end;
+      position:relative;
+      overflow:hidden;
+    }
+    .bars{
+      height:210px;
+      display:flex;
+      align-items:end;
+      gap:14px;
+      padding:10px;
+    }
+    .bar{
+      flex:1;
+      min-width:18px;
+      border-radius:10px 10px 3px 3px;
+      background:linear-gradient(to top,#5b21b6,var(--purple-2));
+      box-shadow:0 0 26px rgba(124,58,237,.22);
+      animation:grow 1.2s ease both;
+      transform-origin:bottom;
+    }
+    .bar:nth-child(2){animation-delay:.1s}
+    .bar:nth-child(3){animation-delay:.2s}
+    .bar:nth-child(4){animation-delay:.3s}
+    .bar:nth-child(5){animation-delay:.4s}
+    .bar:nth-child(6){animation-delay:.5s}
+    @keyframes grow{from{transform:scaleY(.06);opacity:.3}to{transform:scaleY(1);opacity:1}}
+    .visual-label{
+      color:var(--muted);
+      font-size:.82rem;
+      display:flex;
+      justify-content:space-between;
+    }
+
+    /* Projects */
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:20px;
+    }
+    .projects-grid .project-card{
+      grid-template-columns:1fr;
+      gap:22px;
+      padding:28px;
+      height:100%;
+    }
+    .projects-grid .project-copy h3{font-size:clamp(1.5rem,3vw,2.2rem)}
+    .project-meta{color:var(--purple-3);font-size:.82rem;font-weight:800;margin-top:8px}
+    .project-visual.compact{min-height:170px;display:grid;place-items:center;align-content:center}
+    .project-icon{font-size:3.2rem;opacity:.9}
+
+    /* Contact */
+    .contact-box{
+      padding:44px;
+      border-radius:30px;
+      text-align:center;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(circle at top,rgba(124,58,237,.15),transparent 42%),
+        rgba(255,255,255,.035);
+    }
+    .contact-box p{color:var(--muted);max-width:660px;margin:0 auto 28px}
+    .socials{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+    .social-link{
+      padding:12px 16px;
+      border-radius:13px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      font-weight:800;
+      transition:.25s ease;
+    }
+    .social-link:hover{transform:translateY(-3px);border-color:var(--purple-2);color:var(--purple-3)}
+
+    footer{
+      padding:28px 0 40px;
+      color:#8e8a9d;
+      text-align:center;
+      font-size:.9rem;
+    }
+
+    .progress{
+      position:fixed;
+      top:0;left:0;
+      height:3px;
+      background:linear-gradient(90deg,var(--purple),var(--purple-2));
+      z-index:1100;
+      width:0;
+      box-shadow:0 0 14px rgba(167,139,250,.7);
+    }
+    .to-top{
+      position:fixed;
+      right:22px;bottom:22px;
+      width:46px;height:46px;
+      border-radius:50%;
+      display:grid;place-items:center;
+      background:var(--purple);
+      color:white;
+      border:0;
+      cursor:pointer;
+      opacity:0;pointer-events:none;
+      transform:translateY(10px);
+      transition:.25s ease;
+      z-index:100;
+    }
+    .to-top.show{opacity:1;pointer-events:auto;transform:none}
+
+    .reveal{
+      opacity:0;
+      transform:translateY(24px);
+      transition:opacity .7s ease,transform .7s ease;
+    }
+    .reveal.visible{opacity:1;transform:none}
+
+    @media(max-width:900px){
+      .hero-grid,.about-grid,.project-card{grid-template-columns:1fr}
+      .hero-copy{text-align:center}
+      .hero-copy .lead{margin-left:auto;margin-right:auto}
+      .hero-actions{justify-content:center}
+      .role{justify-content:center}
+      .math-card{max-width:680px;margin:auto;width:100%}
+      .skills-grid{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media(max-width:720px){
+      .section{padding:82px 0}
+      .nav-links{
+        position:absolute;
+        left:4%;right:4%;top:70px;
+        flex-direction:column;
+        align-items:stretch;
+        background:rgba(12,12,18,.97);
+        border:1px solid var(--line);
+        border-radius:18px;
+        padding:18px;
+        transform:translateY(-12px);
+        opacity:0;
+        pointer-events:none;
+        transition:.25s ease;
+      }
+      .nav-links.open{transform:none;opacity:1;pointer-events:auto}
+      .menu-btn{display:block}
+      .skills-grid{grid-template-columns:1fr}
+      .project-card,.contact-box{padding:24px}
+      .hero{padding-top:120px}
+      .hero-copy h1{font-size:clamp(2.7rem,15vw,4.6rem)}
+      .formula{display:none}
+      .stat-row{grid-template-columns:1fr}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+
+  <header class="nav-wrap" id="navWrap">
+    <nav class="container" aria-label="Primary navigation">
+      <a href="#home" class="brand">Fatima<span>.</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M4 6h16v2H4V6Zm0 5h16v2H4v-2Zm0 5h16v2H4v-2Z"/>
+        </svg>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <span class="formula f1">Σ xᵢ</span>
+      <span class="formula f2">f(x) = ax² + bx + c</span>
+      <span class="formula f3">∫ₐᵇ f(x) dx</span>
+      <span class="formula f4">P(A|B)</span>
+
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">Data Science • Analytics • AI</div>
+          <h1>Fatima Jaffer<br><span class="gradient">A. Aziz Khalifa</span></h1>
+          <div class="role">Data Science & AI Enthusiast</div>
+          <p class="lead">
+            Mathematics graduate with a Computer Science minor and hands-on training in Data Science.
+            I enjoy working with data, building practical solutions, and exploring how AI can turn
+            complex information into useful results.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View My Work</a>
+            <a class="btn btn-secondary" href="#contact">Contact Me</a>
+          </div>
+        </div>
+
+        <aside class="math-card reveal" aria-label="Mathematics and data visualization">
+          <div class="eyebrow">Data → Analysis → Insight</div>
+          <div class="chart">
+            <svg viewBox="0 0 500 240" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="lineGrad" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#7c3aed"/>
+                  <stop offset="100%" stop-color="#c4b5fd"/>
+                </linearGradient>
+              </defs>
+              <path d="M0 205 C55 180, 85 188, 130 146 S215 112, 260 127 S340 66, 390 78 S450 28, 500 36"
+                fill="none" stroke="url(#lineGrad)" stroke-width="5" stroke-linecap="round"/>
+              <path d="M0 205 C55 180, 85 188, 130 146 S215 112, 260 127 S340 66, 390 78 S450 28, 500 36 L500 240 L0 240 Z"
+                fill="url(#lineGrad)" opacity=".12"/>
+            </svg>
+          </div>
+          <div class="stat-row">
+            <div class="stat"><strong>Data</strong><span>Explore & understand</span></div>
+            <div class="stat"><strong>Code</strong><span>Build practical solutions</span></div>
+            <div class="stat"><strong>AI</strong><span>Explore intelligent tools</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-title reveal">About Me</div>
+        <div class="about-grid">
+          <div class="about-copy reveal">
+            <div class="eyebrow">My Story</div>
+            <p>
+              I am a Mathematics graduate from the University of Bahrain with a minor in Computer Science and
+              practical training in Data Science through General Assembly.
+            </p>
+            <p>
+              My training gave me the opportunity to work on different types of projects, from exploratory data
+              analysis and machine learning to AI applications. I enjoy learning by building and turning data into
+              clear, useful insights.
+            </p>
+            <p>
+              I am currently building my portfolio around practical projects and continuously developing my skills
+              in data analysis, machine learning, and AI.
+            </p>
+          </div>
+
+          <div class="timeline reveal">
+            <div class="timeline-item">
+              <h3>B.Sc. in Mathematics</h3>
+              <p>University of Bahrain · Expected Graduation 2026</p>
+            </div>
+            <div class="timeline-item">
+              <h3>Minor in Computer Science</h3>
+              <p>Programming, problem-solving, and computing foundations</p>
+            </div>
+            <div class="timeline-item">
+              <h3>Data Science Bootcamp</h3>
+              <p>General Assembly · Python, SQL, EDA, Machine Learning, and Data Visualization</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-title reveal">Skills</div>
+        <div class="skills-grid">
+          <article class="skill-card reveal">
+            <h3>Programming</h3>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Java</span>
+            </div>
+          </article>
+          <article class="skill-card reveal">
+            <h3>Data Analysis</h3>
+            <div class="tags">
+              <span class="tag">Data Cleaning</span><span class="tag">EDA</span>
+              <span class="tag">Data Visualization</span><span class="tag">Machine Learning</span>
+            </div>
+          </article>
+          <article class="skill-card reveal">
+            <h3>Libraries</h3>
+            <div class="tags">
+              <span class="tag">Pandas</span><span class="tag">Scikit-learn</span>
+              <span class="tag">Matplotlib</span>
+            </div>
+          </article>
+          <article class="skill-card reveal">
+            <h3>AI & NLP</h3>
+            <div class="tags">
+              <span class="tag">OCR</span><span class="tag">Embeddings</span>
+              <span class="tag">RAG</span><span class="tag">LLMs</span>
+            </div>
+          </article>
+          <article class="skill-card reveal">
+            <h3>Tools</h3>
+            <div class="tags">
+              <span class="tag">Streamlit</span><span class="tag">Web Scraping</span>
+            </div>
+          </article>
+          <article class="skill-card reveal">
+            <h3>Languages</h3>
+            <div class="tags">
+              <span class="tag">Arabic — Native</span><span class="tag">English — Fluent</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-title reveal">Projects</div>
+        <div class="projects-grid">
+
+          <article class="project-card reveal">
+            <div class="project-copy">
+              <div class="eyebrow">AI • Capstone Project</div>
+              <h3>Legal AI Search Assistant</h3>
+              <div class="project-meta">General Assembly × Capital Legal Base</div>
+              <p>
+                Developed an Arabic-language legal search assistant as a Capstone Project to help users find
+                relevant Bahraini legal information using natural language.
+              </p>
+              <ul class="highlights">
+                <li>Collected and processed legal documents using web scraping and OCR.</li>
+                <li>Prepared legal text for semantic search using embeddings.</li>
+                <li>Implemented a RAG pipeline and LLM-based answer generation.</li>
+                <li>Built the chatbot interface with Streamlit and included source-based responses.</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Python</span><span class="tag">Web Scraping</span><span class="tag">OCR</span>
+                <span class="tag">Embeddings</span><span class="tag">RAG</span><span class="tag">LLMs</span><span class="tag">Streamlit</span>
+              </div>
+            </div>
+            <div class="project-visual compact" aria-label="Legal AI project visualization">
+              <div class="project-icon">⚖️</div>
+              <div class="visual-label"><span>Legal Research</span><span>AI Assistant</span></div>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-copy">
+              <div class="eyebrow">Machine Learning • Kaggle</div>
+              <h3>Rental Prices in Bahrain’s Real Estate Market</h3>
+              <p>
+                Built a machine learning regression solution to predict residential rental prices in Bahrain,
+                using data preparation, exploratory analysis, and model evaluation.
+              </p>
+              <ul class="highlights">
+                <li>Prepared and cleaned the real estate dataset for modeling.</li>
+                <li>Explored relationships between property features and rental prices.</li>
+                <li>Applied regression modeling and evaluated predictions using MAE.</li>
+                <li>Prepared a submission for the Kaggle competition.</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Scikit-learn</span>
+                <span class="tag">Machine Learning</span><span class="tag">Regression</span><span class="tag">Kaggle</span>
+              </div>
+            </div>
+            <div class="project-visual compact" aria-label="Rental price project visualization">
+              <div class="project-icon">🏠</div>
+              <div class="visual-label"><span>Real Estate</span><span>Price Prediction</span></div>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-copy">
+              <div class="eyebrow">Python • Data Analysis</div>
+              <h3>Weather Tracker</h3>
+              <p>
+                Built a Python-based weather tracking and analysis program for recording, searching, and analyzing
+                weather observations and identifying temperature patterns.
+              </p>
+              <ul class="highlights">
+                <li>Recorded and organized weather observations including temperature, humidity, and wind.</li>
+                <li>Created weather statistics and searched observations by date.</li>
+                <li>Analyzed average temperature trends by month.</li>
+                <li>Added a feature to predict the following day’s weather using recent weather patterns.</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span>
+                <span class="tag">Data Analysis</span><span class="tag">Data Visualization</span>
+              </div>
+            </div>
+            <div class="project-visual compact" aria-label="Weather project visualization">
+              <div class="project-icon">☁️</div>
+              <div class="visual-label"><span>Weather Data</span><span>Trend Analysis</span></div>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-copy">
+              <div class="eyebrow">Exploratory Data Analysis</div>
+              <h3>Bahrain Imports Data Analysis</h3>
+              <p>
+                Analyzed Bahrain’s non-oil import data from 2021 to 2025 by combining multiple annual datasets,
+                cleaning the data, and exploring trends across countries, commodities, and months.
+              </p>
+              <ul class="highlights">
+                <li>Combined five annual datasets into one unified DataFrame.</li>
+                <li>Standardized columns and cleaned inconsistencies across the datasets.</li>
+                <li>Explored import trends by year, country, commodity, and month.</li>
+                <li>Created visualizations to communicate the main findings clearly.</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span>
+                <span class="tag">EDA</span><span class="tag">Data Visualization</span>
+              </div>
+            </div>
+            <div class="project-visual compact" aria-label="Bahrain imports project visualization">
+              <div class="project-icon">📊</div>
+              <div class="visual-label"><span>2021–2025</span><span>Import Analysis</span></div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-box reveal">
+          <div class="eyebrow">Let’s Connect</div>
+          <h2 class="section-title" style="justify-content:center;margin-top:12px">Contact Me</h2>
+          <p>
+            I am open to opportunities in data analysis, machine learning, and AI.
+            Feel free to reach out through any of the links below.
+          </p>
+          <div class="socials">
+            <a class="social-link" href="mailto:fatimakhalifa12145@gmail.com">Email</a>
+            <a class="social-link" href="https://www.linkedin.com/in/fatima-khalifa-bh/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="social-link" href="https://github.com/FatimaKhalifa5" target="_blank" rel="noopener">GitHub</a>
+            <a class="social-link" href="https://fatimakhalifa5.github.io/" target="_blank" rel="noopener">Portfolio</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    © 2026 Fatima Jaffer A. Aziz Khalifa. All rights reserved.
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+  <script>
+    const navWrap = document.getElementById('navWrap');
+    const navLinks = document.getElementById('navLinks');
+    const menuBtn = document.getElementById('menuBtn');
+    const progress = document.getElementById('progress');
+    const toTop = document.getElementById('toTop');
+    const sections = [...document.querySelectorAll('main section[id]')];
+    const links = [...document.querySelectorAll('.nav-links a')];
+
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+
+    links.forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = `${(scrollTop / maxScroll) * 100}%`;
+
+      navWrap.classList.toggle('scrolled', scrollTop > 20);
+      toTop.classList.toggle('show', scrollTop > 500);
+
+      let current = '';
+      sections.forEach(section => {
+        if (scrollTop >= section.offsetTop - 180) current = section.id;
+      });
+
+      links.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+      });
+    });
+
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
